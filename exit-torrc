@@ -34,9 +34,6 @@ ClientRejectInternalAddresses 1
 
 ##stuff
 
-ExitPolicy accept *:80-81     # http
-ExitPolicy accept *:443       # https
-ExitPolicy accept *:53        # dns
 ExitPolicy reject *:22        # ssh
 ExitPolicy reject *:25        # email stuff
 ExitPolicy reject *:465     # SMTP over SSL
@@ -44,9 +41,12 @@ ExitPolicy reject *:587     # SMTP Submission
 ExitPolicy reject *:6660-6669 # IRC
 ExitPolicy reject *:20-21     # FTP
 ExitPolicy reject *:5900      # VNC
-ExitPolicy reject *:*         # yes, i know having all the other rejects just to put this is silly
 
-# new rules
+# other stuff
+
+ExitPolicy accept *:80-81     # http
+ExitPolicy accept *:443       # https
+ExitPolicy accept *:53        # dns
 ExitPolicy accept *:23        # Telnet
 ExitPolicy accept *:43        # WHOIS
 ExitPolicy accept *:79        # finger
@@ -113,5 +113,7 @@ ExitPolicy accept *:19294     # Google Voice TCP
 ExitPolicy accept *:19638     # Ensim control panel
 ExitPolicy accept *:50002     # Electrum Bitcoin SSL
 ExitPolicy accept *:64738     # Mumble
+
+ExitPolicy reject *:*         # yes, i know having all the other rejects just to put this is silly
 
 ###END
