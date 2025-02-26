@@ -1,0 +1,117 @@
+#1.7
+###START
+
+## family thing policy
+MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA0DFB3419D4C
+
+##page notice
+DirPortFrontPage /etc/tor/tor-exit-notice.html
+DirPort 80
+
+## ports n stuff
+
+Nickname DontSmiteMeThanks
+ContactInfo DontSmiteMeThanks@mail2tor.com 
+ORPort 443
+ExitRelay 1
+SocksPort 0
+
+## BANDWIDTH
+## The config below has a maximum of 800GB
+## Resets first of every month at midnight
+AccountingMax 900 GB
+AccountingStart month 1 0:00
+RelayBandwidthRate 1 MB
+RelayBandwidthBurst 2 MB
+
+## MONITORING
+
+ControlPort 9051
+CookieAuthentication 1
+IPv6Exit 1
+ExitPolicyRejectPrivate 1
+ClientRejectInternalAddresses 1
+
+##stuff
+
+ExitPolicy accept *:80-81     # http
+ExitPolicy accept *:443       # https
+ExitPolicy accept *:53        # dns
+ExitPolicy reject *:22        # ssh
+ExitPolicy reject *:25        # email stuff
+ExitPolicy reject *:465     # SMTP over SSL
+ExitPolicy reject *:587     # SMTP Submission
+ExitPolicy reject *:6660-6669 # IRC
+ExitPolicy reject *:20-21     # FTP
+ExitPolicy reject *:5900      # VNC
+ExitPolicy reject *:*         # yes, i know having all the other rejects just to put this is silly
+
+# new rules
+ExitPolicy accept *:23        # Telnet
+ExitPolicy accept *:43        # WHOIS
+ExitPolicy accept *:79        # finger
+ExitPolicy accept *:88        # kerberos
+ExitPolicy accept *:110       # POP3
+ExitPolicy accept *:194       # IRC
+ExitPolicy accept *:464       # kpasswd
+ExitPolicy accept *:531       # IRC/AIM
+ExitPolicy accept *:543-544   # Kerberos
+ExitPolicy accept *:554       # RTSP
+ExitPolicy accept *:563       # NNTP over SSL
+ExitPolicy accept *:636       # LDAP over SSL
+ExitPolicy accept *:706       # SILC
+ExitPolicy accept *:749       # kerberos
+ExitPolicy accept *:853       # DNS over TLS
+ExitPolicy accept *:873       # rsync
+ExitPolicy accept *:902-904   # VMware
+ExitPolicy accept *:981       # Remote HTTPS management for firewall
+ExitPolicy accept *:989-990   # FTP over SSL
+ExitPolicy accept *:991       # Netnews Administration System
+ExitPolicy accept *:992       # TELNETS
+ExitPolicy accept *:994       # IRCS
+ExitPolicy accept *:995       # POP3 over SSL
+ExitPolicy accept *:1194      # OpenVPN
+ExitPolicy accept *:1220      # QT Server Admin
+ExitPolicy accept *:1293      # PKT-KRB-IPSec
+ExitPolicy accept *:1500      # VLSI License Manager
+ExitPolicy accept *:1533      # Sametime
+ExitPolicy accept *:1677      # GroupWise
+ExitPolicy accept *:1723      # PPTP
+ExitPolicy accept *:1755      # RTSP
+ExitPolicy accept *:1863      # MSNP
+ExitPolicy accept *:2082      # Infowave Mobility Server
+ExitPolicy accept *:2083      # Secure Radius Service (radsec)
+ExitPolicy accept *:2086-2087 # GNUnet, ELI
+ExitPolicy accept *:2095-2096 # NBX
+ExitPolicy accept *:2102-2104 # Zephyr
+ExitPolicy accept *:3128      # SQUID
+ExitPolicy accept *:3389      # MS WBT
+ExitPolicy accept *:3690      # SVN
+ExitPolicy accept *:4321      # RWHOIS
+ExitPolicy accept *:4643      # Virtuozzo
+ExitPolicy accept *:5050      # MMCC
+ExitPolicy accept *:5190      # ICQ
+ExitPolicy accept *:5222-5223 # XMPP, XMPP over SSL
+ExitPolicy accept *:5228      # Android Market
+ExitPolicy accept *:6679      # IRC SSL
+ExitPolicy accept *:6697      # IRC SSL
+ExitPolicy accept *:8000      # iRDMI
+ExitPolicy accept *:8008      # HTTP alternate
+ExitPolicy accept *:8074      # Gadu-Gadu
+ExitPolicy accept *:8080      # HTTP Proxies
+ExitPolicy accept *:8082      # HTTPS Electrum Bitcoin port
+ExitPolicy accept *:8087-8088 # Simplify Media SPP Protocol, Radan HTTP
+ExitPolicy accept *:8232-8233 # Zcash
+ExitPolicy accept *:8332-8333 # Bitcoin
+ExitPolicy accept *:8443      # PCsync HTTPS
+ExitPolicy accept *:8888      # HTTP Proxies, NewsEDGE
+ExitPolicy accept *:9418      # git
+ExitPolicy accept *:9999      # distinct
+ExitPolicy accept *:10000     # Network Data Management Protocol
+ExitPolicy accept *:11371     # OpenPGP hkp (http keyserver protocol)
+ExitPolicy accept *:19294     # Google Voice TCP
+ExitPolicy accept *:19638     # Ensim control panel
+ExitPolicy accept *:50002     # Electrum Bitcoin SSL
+ExitPolicy accept *:64738     # Mumble
+
+###END
