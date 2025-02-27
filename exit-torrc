@@ -1,4 +1,4 @@
-#1.7
+#1.8
 ###START
 
 ## family thing policy
@@ -10,7 +10,7 @@ DirPort 80
 
 ## ports n stuff
 
-Nickname DontSmiteMeThanks
+Nickname DontSmiteMeDown
 ContactInfo dontsmitemedown@proton.me
 ORPort 443
 ExitRelay 1
