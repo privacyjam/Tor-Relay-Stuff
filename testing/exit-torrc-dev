@@ -1,23 +1,26 @@
 #1.8
 ###START
 
-## family thing policy
-MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA0DFB3419D4C
-
-##page notice
+##Page Notice
 DirPortFrontPage /etc/tor/tor-exit-notice.html
 DirPort 80
 
-## ports n stuff
-
+## Ports and Info
 Nickname DontSmiteMeDown
 ContactInfo dontsmitemedown@proton.me
 ORPort 443
 ExitRelay 1
 SocksPort 0
+ControlPort 9051
+CookieAuthentication 1
+IPv6Exit 1
+ExitPolicyRejectPrivate 1
+ClientRejectInternalAddresses 1
 
-## BANDWIDTH
-## The config below has a maximum of 800GB
+## family thing policy
+MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA0DFB3419D4C
+
+## Badndwidth
 ## Resets first of every month at midnight
 AccountingMax 950 GB
 AccountingStart month 1 0:00
@@ -28,15 +31,7 @@ RelayBandwidthBurst 1.5 MB
 #BandwidthRate 800 KB
 #BandwidthBurst 1000 KB
 
-## MONITORING
-
-ControlPort 9051
-CookieAuthentication 1
-IPv6Exit 1
-ExitPolicyRejectPrivate 1
-ClientRejectInternalAddresses 1
-
-##stuff
+##rules (block stuff)
 
 ExitPolicy reject *:22        # ssh
 ExitPolicy reject *:25        # email stuff
@@ -46,7 +41,15 @@ ExitPolicy reject *:6660-6669 # IRC
 ExitPolicy reject *:20-21     # FTP
 ExitPolicy reject *:5900      # VNC
 
-# other stuff
+ExitPolicy reject *:51413       # Block the default BitTorrent port
+ExitPolicy reject *:6881-6889   # Block the older BitTorrent ports
+ExitPolicy reject *:6969        # Block DHT port
+ExitPolicy reject *:8080        # Block HTTP Proxy ports often used by torrents
+ExitPolicy reject *:8888        # Another common proxy port used in torrents
+ExitPolicy reject *:9000-9090   # Some other BitTorrent client ports
+ExitPolicy reject *:27015-27030 # Ports often used by torrents in Steam
+
+# more rules (allow stuff)
 
 ExitPolicy accept *:80-81     # http
 ExitPolicy accept *:443       # https
@@ -118,6 +121,6 @@ ExitPolicy accept *:19638     # Ensim control panel
 ExitPolicy accept *:50002     # Electrum Bitcoin SSL
 ExitPolicy accept *:64738     # Mumble
 
+# then yeah block anything i dont mention so i dont get smited!!
 ExitPolicy reject *:*         # yes, i know having all the other rejects just to put this is silly
-
 ###END
