@@ -11,7 +11,7 @@ DirPort 80
 ## ports n stuff
 
 Nickname DontSmiteMeThanks
-ContactInfo DontSmiteMeThanks@mail2tor.com 
+ContactInfo dontsmitemedown@proton.me
 ORPort 443
 ExitRelay 1
 SocksPort 0
@@ -19,10 +19,10 @@ SocksPort 0
 ## BANDWIDTH
 ## The config below has a maximum of 800GB
 ## Resets first of every month at midnight
-AccountingMax 900 GB
+AccountingMax 950 GB
 AccountingStart month 1 0:00
 RelayBandwidthRate 1 MB
-RelayBandwidthBurst 2 MB
+RelayBandwidthBurst 1.5 MB
 
 ## MONITORING
 
