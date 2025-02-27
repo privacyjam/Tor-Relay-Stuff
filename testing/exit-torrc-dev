@@ -24,6 +24,10 @@ AccountingStart month 1 0:00
 RelayBandwidthRate 1 MB
 RelayBandwidthBurst 1.5 MB
 
+## New settings ill have to set if it keeps being at like freaking max burst
+#BandwidthRate 800 KB
+#BandwidthBurst 1000 KB
+
 ## MONITORING
 
 ControlPort 9051
