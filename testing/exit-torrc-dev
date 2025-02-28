@@ -22,12 +22,14 @@ MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA
 
 ## Badndwidth
 ## Resets first of every month at midnight
-AccountingMax 950 GB
+AccountingMax 995 GB
 AccountingStart month 1 0:00
 RelayBandwidthRate 1 MB
 RelayBandwidthBurst 1.5 MB
 
-## New settings ill have to set if it keeps being at like freaking max burst
+#possible new settings
+#AccountingStart day 00:00
+#AccountingMax 33 GB
 #BandwidthRate 800 KB
 #BandwidthBurst 1000 KB
 
