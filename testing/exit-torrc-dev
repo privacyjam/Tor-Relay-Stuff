@@ -1,18 +1,18 @@
 #1.9
 ###START
 
-#Notice Page
+## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
 DirPort 80
 
-## Family Policy
+## ===== FAMILY POLICY ===== ##
 MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA0DFB3419D4C
 
-#Nickname n stuff
+## ===== RELAY INFO ===== ##
 Nickname DontSmiteMeDown
 ContactInfo DontSmiteMeDown@proton.me (BTC bc1qdfe9vav3uf2gpge854acdqxucgfhytyydar9fr)
 
-## Badndwidth and Ports
+## ===== BANDWIDTH AND PORTS ===== ##
 ## Resets first of every month at midnight
 AccountingMax 995 GB
 AccountingStart month 1 0:00
@@ -27,17 +27,17 @@ IPv6Exit 1
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 
-#possible new settings
+#Possible new settings
 #BandwidthRate 800 KB
 #BandwidthBurst 1000 KB
 
-#Rules
+## ===== OUTBOUND RULES ===== ##
 #rules incase im silly and change them down there
 ExitPolicy accept *:80-81     # http
 ExitPolicy accept *:443       # https
 ExitPolicy accept *:53        # dns
 
-ExitPolicy reject *:22          # SSH
+# ExitPolicy reject *:22          # SSH
 
 ## === BLOCK COMMON TORRENT PORTS === ##
 ExitPolicy reject *:6881-6889   # Standard BitTorrent ports
