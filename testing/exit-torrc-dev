@@ -71,5 +71,20 @@ ExitPolicy reject *:2525        # Alternative SMTP (used when 25 is blocked)
 ExitPolicy reject *:26          # Unofficial SMTP (spammers use this)
 ExitPolicy reject *:4190        # Sieve Mail Filtering (used in mail exploits)
 
+## === OTHER ABUSE PORTS === ##
+# ExitPolicy reject *:6660-6669   # IRC (used for botnet control)
+# ExitPolicy reject *:6697        # IRC over SSL (botnet C2 communication)
+# ExitPolicy reject *:7000-7002   # UnrealIRCd default ports (C2 abuse)
+
+ExitPolicy reject *:135-139     # NetBIOS (Windows File Sharing, LAN exploits)
+ExitPolicy reject *:445         # SMB (EternalBlue, WannaCry, LAN malware)
+# ExitPolicy reject *:3389        # RDP (Remote Desktop, brute-force attacks)
+# ExitPolicy reject *:389         # LDAP (used in Windows Active Directory attacks)
+# ExitPolicy reject *:636         # LDAP over SSL (same as above, but encrypted)
+# ExitPolicy reject *:5800-5801   # VNC Web Interface (often exposed with no password)
+# ExitPolicy reject *:5900-5901   # VNC Remote Desktop (brute-force target)
+# ExitPolicy reject *:4899        # Radmin (Remote Admin Tool, often hijacked)
+
+
 ## === ALLOW ALL OTHER TRAFFIC === ##
 ExitPolicy accept *:*
