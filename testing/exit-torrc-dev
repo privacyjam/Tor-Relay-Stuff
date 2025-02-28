@@ -7,7 +7,7 @@ DirPort 80
 
 ## Ports and Info
 Nickname DontSmiteMeDown
-ContactInfo dontsmitemedown@proton.me
+ContactInfo DontSmiteMeDown@proton.me (BTC bc1qdfe9vav3uf2gpge854acdqxucgfhytyydar9fr)
 ORPort 443
 ExitRelay 1
 SocksPort 0
@@ -34,6 +34,7 @@ RelayBandwidthBurst 1.5 MB
 #allow rules incase im silly and reject them down there
 ExitPolicy accept *:80-81     # http
 ExitPolicy accept *:443       # https
+ExitPolicy accept *:53        # dns
 
 ##rules (block stuff)
 
@@ -48,7 +49,6 @@ ExitPolicy reject *:5900      # VNC
 ExitPolicy reject *:51413       # Block the default BitTorrent port
 ExitPolicy reject *:6881-6889   # Block the older BitTorrent ports
 ExitPolicy reject *:6969        # Block DHT port
-# ExitPolicy reject *:8080        # (I dont think i should block this) Block HTTP Proxy ports often used by torrents
 ExitPolicy reject *:8888        # Another common proxy port used in torrents
 ExitPolicy reject *:9000-9090   # Some other BitTorrent client ports
 ExitPolicy reject *:27015-27030 # Ports often used by torrents in Steam
