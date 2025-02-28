@@ -1,13 +1,23 @@
 #1.9
 ###START
 
-##Page Notice
+#Notice Page
 DirPortFrontPage /etc/tor/tor-exit-notice.html
 DirPort 80
 
-## Ports and Info
+## Family Policy
+MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA0DFB3419D4C
+
+#Nickname n stuff
 Nickname DontSmiteMeDown
 ContactInfo DontSmiteMeDown@proton.me (BTC bc1qdfe9vav3uf2gpge854acdqxucgfhytyydar9fr)
+
+## Badndwidth and Ports
+## Resets first of every month at midnight
+AccountingMax 995 GB
+AccountingStart month 1 0:00
+RelayBandwidthRate 1 MB
+RelayBandwidthBurst 1.3 MB
 ORPort 443
 ExitRelay 1
 SocksPort 0
@@ -17,20 +27,11 @@ IPv6Exit 1
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 
-## family thing policy
-MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA0DFB3419D4C
-
-## Badndwidth
-## Resets first of every month at midnight
-AccountingMax 995 GB
-AccountingStart month 1 0:00
-RelayBandwidthRate 1 MB
-RelayBandwidthBurst 1.3 MB
-
 #possible new settings
 #BandwidthRate 800 KB
 #BandwidthBurst 1000 KB
 
+#Rules
 #rules incase im silly and change them down there
 ExitPolicy accept *:80-81     # http
 ExitPolicy accept *:443       # https
@@ -55,6 +56,8 @@ ExitPolicy reject *:4444        # Common DHT ports
 ExitPolicy reject *:5555
 ExitPolicy reject *:7777
 ExitPolicy reject *:50000-60000 # High-range dynamic torrent ports
+ExitPolicy reject *:6961-6969   # Additional BitTorrent trackers
+ExitPolicy reject *:9090        # BitTorrent Web UI (some clients use this)
 
 ## === BLOCK EMAIL-RELATED PORTS === ##
 ExitPolicy reject *:25          # SMTP (sending mail between servers, often abused by spammers)
@@ -64,6 +67,9 @@ ExitPolicy reject *:110         # POP3 (receiving mail)
 ExitPolicy reject *:995         # POP3 over SSL (secure email retrieval)
 ExitPolicy reject *:143         # IMAP (receiving mail)
 ExitPolicy reject *:993         # IMAPS (secure email retrieval)
+ExitPolicy reject *:2525        # Alternative SMTP (used when 25 is blocked)
+ExitPolicy reject *:26          # Unofficial SMTP (spammers use this)
+ExitPolicy reject *:4190        # Sieve Mail Filtering (used in mail exploits)
 
 ## === ALLOW ALL OTHER TRAFFIC === ##
 ExitPolicy accept *:*
