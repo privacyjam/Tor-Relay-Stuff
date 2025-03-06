@@ -10,7 +10,7 @@ MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA
 
 ## ===== RELAY INFO ===== ##
 Nickname DontSmiteMeDown
-ContactInfo DontSmiteMeDown@proton.me [bc1qdfe9vav3uf2gpge854acdqxucgfhytyydar9fr]
+ContactInfo DontSmiteMeDown@proton.me
 
 ## ===== BANDWIDTH AND PORTS ===== ##
 ## Resets first of every month at midnight
@@ -55,7 +55,7 @@ ExitPolicy reject *:5555
 ExitPolicy reject *:7777
 ExitPolicy reject *:50000-60000 # High-range dynamic torrent ports
 ExitPolicy reject *:6961-6969   # Additional BitTorrent trackers
-ExitPolicy reject *:9090        # BitTorrent Web UI (some clients use this)
+# ExitPolicy reject *:9090        # BitTorrent Web UI (some clients use this)
 
 ## === BLOCK EMAIL-RELATED PORTS === ##
 ExitPolicy reject *:25          # SMTP (sending mail between servers, often abused by spammers)
@@ -73,9 +73,8 @@ ExitPolicy reject *:4190        # Sieve Mail Filtering (used in mail exploits)
 # ExitPolicy reject *:6660-6669   # IRC (used for botnet control)
 # ExitPolicy reject *:6697        # IRC over SSL (botnet C2 communication)
 # ExitPolicy reject *:7000-7002   # UnrealIRCd default ports (C2 abuse)
-
-ExitPolicy reject *:135-139     # NetBIOS (Windows File Sharing, LAN exploits)
-ExitPolicy reject *:445         # SMB (EternalBlue, WannaCry, LAN malware)
+# ExitPolicy reject *:135-139     # NetBIOS (Windows File Sharing, LAN exploits)
+# ExitPolicy reject *:445         # SMB (EternalBlue, WannaCry, LAN malware)
 # ExitPolicy reject *:22          # SSH
 # ExitPolicy reject *:3389        # RDP (Remote Desktop, brute-force attacks)
 # ExitPolicy reject *:389         # LDAP (used in Windows Active Directory attacks)
