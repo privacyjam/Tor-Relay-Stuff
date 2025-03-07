@@ -1,10 +1,7 @@
 #!/bin/bash
 
-#also yes, this like like 90% Chatgpt
-
-# Configurable Variables
 CHECK_INTERVAL=30    # Interval in minutes
-GIST_URL="https://raw.githubusercontent.com/DontSmiteMeDown/Tor-Relay-Stuff/refs/heads/main/exit-torrc"  # URL to fetch the config from
+URL="https://raw.githubusercontent.com/DontSmiteMeDown/Tor-Relay-Stuff/refs/heads/main/exit-torrc"  # URL to fetch the config from
 LOCAL_CONFIG_PATH="/etc/tor/torrc"  # Path to the local Torrc
 BACKUP_PATH="$LOCAL_CONFIG_PATH.backup"  # Path to backup config file
 CURL_TIMEOUT=20  # Timeout for curl in seconds
@@ -12,9 +9,9 @@ TOR_SERVICE_NAME="tor"  # Name of the Tor service
 
 # Function to perform the update check
 perform_update() {
-    # Download the new config file from the Gist URL via HTTP
-    echo "Downloading new config file from $GIST_URL..."
-    curl --max-time $CURL_TIMEOUT "$GIST_URL" -o "$LOCAL_CONFIG_PATH.new"
+    # Download the config
+    echo "Downloading new config file from $URL..."
+    curl --max-time $CURL_TIMEOUT "$URL" -o "$LOCAL_CONFIG_PATH.new"
 
     if [ $? -eq 0 ]; then
         echo "Download successful, extracting version information..."
@@ -39,11 +36,11 @@ perform_update() {
             mv "$LOCAL_CONFIG_PATH.new" "$LOCAL_CONFIG_PATH"
 
             # Restart Tor service to apply new configuration
-            echo "Restarting Tor service..."
-            sudo systemctl restart $TOR_SERVICE_NAME
+            echo "Reloading Tor service..."
+            sudo systemctl reload $TOR_SERVICE_NAME
 
             # Confirm the update
-            echo "Update successful, config file updated, and Tor restarted!"
+            echo "Update successful, config file updated, and Tor reloaded"
         else
             echo "No new version detected."
             # Clean up the downloaded file if it's not used
