@@ -8,9 +8,9 @@ CURL_TIMEOUT=20
 TOR_SERVICE_NAME="tor"
 
 # Function to compare versions
-version_greater_or_equal() {
-    # Compare two version strings, returns 0 if the first is greater or equal
-    [ "$(printf '%s\n' "$2" "$1" | sort -V | head -n 1)" = "$2" ]
+version_greater() {
+    # Compare two version strings, returns 0 if the first is greater
+    [ "$(printf '%s\n' "$1" "$2" | sort -V | head -n 1)" != "$1" ]
 }
 
 perform_update() {
@@ -33,7 +33,7 @@ perform_update() {
     echo "Local version: $LOCAL_VERSION"
     echo "Downloaded version: $DOWNLOADED_VERSION"
 
-    if version_greater_or_equal "$DOWNLOADED_VERSION" "$LOCAL_VERSION"; then
+    if version_greater "$DOWNLOADED_VERSION" "$LOCAL_VERSION"; then
         echo "New version detected. Validating config..."
 
         tor -f "$LOCAL_CONFIG_PATH.new" --verify-config
