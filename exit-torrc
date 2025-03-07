@@ -1,15 +1,15 @@
-#2.1
+#2.2
 
 ## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
 DirPort 80
 
-## ===== FAMILY POLICY ===== ##
-MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA0DFB3419D4C, 7C338CF71A5BFB9EE4F426807557CE05DCD0576A
-
 ## ===== RELAY INFO ===== ##
 Nickname DontSmiteMeDown
 ContactInfo DontSmiteMeDown@proton.me
+
+## ===== FAMILY POLICY ===== ##
+MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA0DFB3419D4C, 7C338CF71A5BFB9EE4F426807557CE05DCD0576A, 66AF2805492A96F422CC0D112E40E4F328F2E085
 
 ## ===== BANDWIDTH AND PORTS ===== ##
 ## Resets first of every month at midnight
@@ -31,7 +31,7 @@ ClientRejectInternalAddresses 1
 #BandwidthBurst 1000 KB
 
 ## ===== OUTBOUND RULES ===== ##
-#These rules are here as a backup if I accidentaly block them down there
+#These rules are here so I dont accidentaly block them down there
 ExitPolicy accept *:80-81     # HTTP
 ExitPolicy accept *:443       # HTTPS
 ExitPolicy accept *:53        # DNS
