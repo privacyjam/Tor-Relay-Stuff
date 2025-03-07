@@ -1,58 +1,63 @@
 #!/bin/bash
 
 CHECK_INTERVAL=30    # Interval in minutes
-URL="https://raw.githubusercontent.com/DontSmiteMeDown/Tor-Relay-Stuff/refs/heads/main/exit-torrc"  # URL to fetch the config from
-LOCAL_CONFIG_PATH="/etc/tor/torrc"  # Path to the local Torrc
-BACKUP_PATH="$LOCAL_CONFIG_PATH.backup"  # Path to backup config file
-CURL_TIMEOUT=20  # Timeout for curl in seconds
-TOR_SERVICE_NAME="tor"  # Name of the Tor service
+URL="https://raw.githubusercontent.com/DontSmiteMeDown/Tor-Relay-Stuff/refs/heads/main/exit-torrc"
+LOCAL_CONFIG_PATH="/etc/tor/torrc"
+BACKUP_PATH="$LOCAL_CONFIG_PATH.backup"
+CURL_TIMEOUT=20
+TOR_SERVICE_NAME="tor"
 
-# Function to perform the update check
+# Function to compare versions
+version_greater_or_equal() {
+    # Compare two version strings, returns 0 if the first is greater or equal
+    [ "$(printf '%s\n' "$2" "$1" | sort -V | head -n 1)" = "$2" ]
+}
+
 perform_update() {
-    # Download the config
     echo "Downloading new config file from $URL..."
-    curl --max-time $CURL_TIMEOUT "$URL" -o "$LOCAL_CONFIG_PATH.new"
+    curl --fail --max-time $CURL_TIMEOUT "$URL" -o "$LOCAL_CONFIG_PATH.new"
 
-    if [ $? -eq 0 ]; then
-        echo "Download successful, extracting version information..."
+    if [ $? -ne 0 ]; then
+        echo "Failed to download the config file. Skipping this check."
+        return 1
+    fi
 
-        # Get the version info (first line) from the downloaded config
-        DOWNLOADED_VERSION=$(head -n 1 "$LOCAL_CONFIG_PATH.new" | sed 's/#//')
+    if [ ! -f "$LOCAL_CONFIG_PATH" ]; then
+        echo "Local config file not found. Skipping update."
+        return 1
+    fi
 
-        # Get the local version info (first line) from the current config file
-        LOCAL_VERSION=$(head -n 1 "$LOCAL_CONFIG_PATH" | sed 's/#//')
+    DOWNLOADED_VERSION=$(head -n 1 "$LOCAL_CONFIG_PATH.new" | sed 's/#//')
+    LOCAL_VERSION=$(head -n 1 "$LOCAL_CONFIG_PATH" | sed 's/#//')
 
-        echo "Local version: $LOCAL_VERSION"
-        echo "Downloaded version: $DOWNLOADED_VERSION"
+    echo "Local version: $LOCAL_VERSION"
+    echo "Downloaded version: $DOWNLOADED_VERSION"
 
-        # Compare the versions
-        if [ "$LOCAL_VERSION" != "$DOWNLOADED_VERSION" ]; then
-            echo "New version detected, backing up and updating..."
+    if version_greater_or_equal "$DOWNLOADED_VERSION" "$LOCAL_VERSION"; then
+        echo "New version detected. Validating config..."
 
-            # Backup the current config file before replacing it
-            cp "$LOCAL_CONFIG_PATH" "$BACKUP_PATH"
-
-            # Replace the config file with the downloaded one
-            mv "$LOCAL_CONFIG_PATH.new" "$LOCAL_CONFIG_PATH"
-
-            # Restart Tor service to apply new configuration
-            echo "Reloading Tor service..."
-            sudo systemctl reload $TOR_SERVICE_NAME
-
-            # Confirm the update
-            echo "Update successful, config file updated, and Tor reloaded"
-        else
-            echo "No new version detected."
-            # Clean up the downloaded file if it's not used
+        tor -f "$LOCAL_CONFIG_PATH.new" --verify-config
+        if [ $? -ne 0 ]; then
+            echo "Downloaded config is invalid. Aborting update."
             rm "$LOCAL_CONFIG_PATH.new"
+            return 1
         fi
+
+        echo "Config is valid. Backing up and updating..."
+        cp "$LOCAL_CONFIG_PATH" "$BACKUP_PATH-$(date +%Y%m%d-%H%M%S)"
+        mv "$LOCAL_CONFIG_PATH.new" "$LOCAL_CONFIG_PATH"
+
+        echo "Reloading Tor service..."
+        sudo systemctl reload $TOR_SERVICE_NAME
+
+        echo "Update successful, config file updated, and Tor reloaded."
     else
-        echo "Failed to download the config file from the Gist. Skipping this check."
+        echo "Downloaded version is older or the same as the local version. Skipping update."
+        rm "$LOCAL_CONFIG_PATH.new"
     fi
 }
 
-# Loop to perform update at specified interval
 while true; do
     perform_update
-    sleep $((CHECK_INTERVAL * 60))  # Wait for the specified interval (in minutes)
+    sleep $((CHECK_INTERVAL * 60))
 done
