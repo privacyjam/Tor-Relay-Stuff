@@ -1,4 +1,4 @@
-#2.2
+#2.3
 
 ## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
@@ -17,6 +17,7 @@ AccountingMax 995 GB
 AccountingStart month 1 0:00
 RelayBandwidthRate 1 MB
 RelayBandwidthBurst 1.3 MB
+
 ORPort 443
 ExitRelay 1
 SocksPort 0
@@ -26,10 +27,6 @@ IPv6Exit 1
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 
-#Backup settings if stuff get dire
-#BandwidthRate 800 KB
-#BandwidthBurst 1000 KB
-
 ## ===== OUTBOUND RULES ===== ##
 #These rules are here so I dont accidentaly block them down there
 ExitPolicy accept *:80-81     # HTTP
@@ -37,36 +34,38 @@ ExitPolicy accept *:443       # HTTPS
 ExitPolicy accept *:53        # DNS
 
 ## === BLOCK COMMON TORRENT PORTS === ##
-ExitPolicy reject *:6881-6889   # Standard BitTorrent ports
-ExitPolicy reject *:6969        # BitTorrent tracker port
-ExitPolicy reject *:51413       # Transmission default port
-ExitPolicy reject *:16881       # Other torrent clients
-ExitPolicy reject *:44168-44170 # µTorrent
-ExitPolicy reject *:10000-11000 # Some torrent clients use this range
-ExitPolicy reject *:2706        # Private tracker port
-ExitPolicy reject *:2710        # UDP tracker port
-ExitPolicy reject *:8999        # Legacy trackerless torrenting
-ExitPolicy reject *:31337       # Tixati default port
-ExitPolicy reject *:58846       # Deluge
-ExitPolicy reject *:58946       # Alternative Deluge port
-ExitPolicy reject *:4444        # Common DHT ports
-ExitPolicy reject *:5555
-ExitPolicy reject *:7777
-ExitPolicy reject *:50000-60000 # High-range dynamic torrent ports
-ExitPolicy reject *:6961-6969   # Additional BitTorrent trackers
-# ExitPolicy reject *:9090      # BitTorrent Web UI (some clients use this)
+ExitPolicy reject *:6881-6889    # Standard BitTorrent ports
+ExitPolicy reject *:6969         # BitTorrent tracker port
+ExitPolicy reject *:51413        # Transmission default port
+ExitPolicy reject *:16881        # Other torrent clients
+ExitPolicy reject *:44168-44170  # µTorrent
+ExitPolicy reject *:8999         # Legacy trackerless torrenting
+ExitPolicy reject *:31337        # Tixati default port
+ExitPolicy reject *:58846        # Deluge
+ExitPolicy reject *:58946        # Alternative Deluge port
+
+# Trackers and DHT
+ExitPolicy reject *:2710         # UDP tracker port (used by torrents)
+ExitPolicy reject *:6961-6969    # Additional BitTorrent trackers
+# ExitPolicy reject *:10000-11000  # Some torrent clients use this range
+# ExitPolicy reject *:50000-60000  # High-range dynamic torrent ports (used for P2P)
+# ExitPolicy reject *:4444         # Common DHT ports
+# ExitPolicy reject *:5555
+# ExitPolicy reject *:7777
+# ExitPolicy reject *:9090         # BitTorrent Web UI (some clients use this)
+
 
 ## === BLOCK EMAIL-RELATED PORTS === ##
-ExitPolicy reject *:25          # SMTP (sending mail between servers, often abused by spammers)
+ExitPolicy reject *:25          # SMTP (server-to-server, high spam risk)
 ExitPolicy reject *:465         # SMTPS (legacy encrypted email sending)
-ExitPolicy reject *:587         # SMTP with authentication (used for outgoing mail)
-ExitPolicy reject *:110         # POP3 (receiving mail)
+ExitPolicy reject *:587         # SMTP with authentication (prevents spam bots)
+ExitPolicy reject *:110         # POP3 (insecure email retrieval)
 ExitPolicy reject *:995         # POP3 over SSL (secure email retrieval)
-ExitPolicy reject *:143         # IMAP (receiving mail)
+ExitPolicy reject *:143         # IMAP (insecure email retrieval)
 ExitPolicy reject *:993         # IMAPS (secure email retrieval)
-ExitPolicy reject *:2525        # Alternative SMTP (used when 25 is blocked)
+ExitPolicy reject *:2525        # Alternative SMTP (spammers use this)
 ExitPolicy reject *:26          # Unofficial SMTP (spammers use this)
-ExitPolicy reject *:4190        # Sieve Mail Filtering (used in mail exploits)
+ExitPolicy reject *:4190        # Sieve Mail Filtering (potential exploits)
 
 ## === ALLOW ALL OTHER TRAFFIC === ##
 ExitPolicy accept *:*
