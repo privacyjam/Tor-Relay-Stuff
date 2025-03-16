@@ -50,9 +50,9 @@ ExitPolicy reject *:6961-6969    # Additional BitTorrent trackers
 
 
 ## === BLOCK EMAIL-RELATED PORTS === ##
-ExitPolicy reject *:25        # Block SMTP (sending email)
-ExitPolicy reject *:465       # Block SMTPS (SMTP over SSL/TLS)
-ExitPolicy reject *:587       # Block SMTP with STARTTLS
+ExitPolicy reject *:25        # SMTP (sending email)
+ExitPolicy reject *:465       # SMTPS (SMTP over SSL/TLS)
+ExitPolicy reject *:587       # SMTP with STARTTLS
 
 ## === ALLOW ALL OTHER TRAFFIC === ##
 ExitPolicy accept *:*
