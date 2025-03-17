@@ -1,4 +1,4 @@
-#2.5
+#2.6
 
 ## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
@@ -13,7 +13,7 @@ MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA
 
 ## ===== BANDWIDTH AND PORTS ===== ##
 ## Resets first of every month at midnight
-AccountingMax 995 GB
+AccountingMax 999 GB
 AccountingStart month 1 0:00
 RelayBandwidthRate 1 MB
 RelayBandwidthBurst 1.3 MB
