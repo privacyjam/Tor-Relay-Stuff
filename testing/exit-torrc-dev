@@ -33,6 +33,9 @@ ExitPolicy accept *:80-81     # HTTP
 ExitPolicy accept *:443       # HTTPS
 ExitPolicy accept *:53        # DNS
 
+# Ports ive gotten abuse reports for
+ExitPolicy reject *:41954 # Plankton: The Movie (lol)
+
 ## === BLOCK COMMON TORRENT PORTS === ##
 ExitPolicy reject *:6881-6889    # Standard BitTorrent ports
 ExitPolicy reject *:6969         # BitTorrent tracker port
