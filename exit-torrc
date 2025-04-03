@@ -15,8 +15,8 @@ MyFamily 9E464461FC95585006B063CDC55884E53379D8DA, BC00BDF27652E1E75F90BB5CA7FE7
 ## Resets first of every month at midnight
 AccountingMax 999 GB
 AccountingStart month 1 0:00
-RelayBandwidthRate 1.1 MB
-RelayBandwidthBurst 1.4 MB
+RelayBandwidthRate 1.2 MB
+RelayBandwidthBurst 1.5 MB
 
 ORPort 443
 ExitRelay 1
