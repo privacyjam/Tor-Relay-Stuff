@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CHECK_INTERVAL=30    # Interval in minutes
-URL="https://raw.githubusercontent.com/DontSmiteMeDown/Tor-Relay-Stuff/refs/heads/main/exit-torrc"
+URL="https://raw.githubusercontent.com/DontSmiteMeDown/Tor-Relay-Stuff/refs/heads/main/NAMEHERE"
 LOCAL_CONFIG_PATH="/etc/tor/torrc"
 BACKUP_PATH="$LOCAL_CONFIG_PATH.backup"
 CURL_TIMEOUT=20
