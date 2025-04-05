@@ -1,11 +1,11 @@
-#3.2
+#3.3
 
 ## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
 DirPort 0
 
 ## ===== RELAY INFO ===== ##
-Nickname DontSmiteMeDown
+Nickname ShuttingDown
 ContactInfo RELAY SHUTTING DOWN SOON / dontsmitemedown@privacyjam.com / donate.privacyjam.com
 
 ## ===== FAMILY POLICY ===== ##
@@ -15,15 +15,15 @@ MyFamily BC00BDF27652E1E75F90BB5CA7FE7E8C05E27678, B716B422ACB1CF5186C1417F6E6CA
 ## Resets first of every month at midnight
 AccountingMax 999 GB
 AccountingStart month 1 0:00
-RelayBandwidthRate 10 KB
-RelayBandwidthBurst 10 KB
+RelayBandwidthRate 76800 Bytes
+RelayBandwidthBurst 76800 Bytes
 
 ORPort 443
 ExitRelay 0
 SocksPort 0
 ControlPort 9051
 CookieAuthentication 1
-IPv6Exit 1
+IPv6Exit 0
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 ExitPolicy reject *:*
