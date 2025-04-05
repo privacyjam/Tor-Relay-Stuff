@@ -20,7 +20,7 @@ ExitRelay 1
 SocksPort 0
 ControlPort 9051
 CookieAuthentication 1
-IPv6Exit 1
+# IPv6Exit 1 #This one aint got an ipv6
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 
