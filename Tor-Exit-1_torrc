@@ -40,5 +40,17 @@ ExitPolicy reject *:16881         # BitTorrent variant
 ExitPolicy reject *:44168-44170   # µTorrent
 ExitPolicy reject *:6961-6969     # Extra trackers
 
+#vsps moment
+ExitPolicy reject *:22        # SSH - brute-force tool target
+ExitPolicy reject *:23        # Telnet - old, insecure
+ExitPolicy reject *:3389      # RDP - used in botnet attacks
+ExitPolicy reject *:5900-5910 # VNC - remote access often probed
+ExitPolicy reject *:3306      # MySQL - brute force target
+ExitPolicy reject *:5432      # PostgreSQL
+ExitPolicy reject *:6379      # Redis - open Redis = big risk
+ExitPolicy reject *:27017     # MongoDB - public MongoDB attacks common
+ExitPolicy reject *:135-139   # NetBIOS
+ExitPolicy reject *:445       # SMB - EternalBlue & other exploits
+
 ## === ALLOW ALL OTHER TRAFFIC === ##
 ExitPolicy accept *:*
