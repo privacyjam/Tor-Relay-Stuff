@@ -20,7 +20,7 @@ ExitRelay 1
 SocksPort 0
 ControlPort 9051
 CookieAuthentication 1
-# IPv6Exit 1 #No ipv6 Adress
+IPv6Exit 0 #No ipv6 given
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 
@@ -28,7 +28,7 @@ ClientRejectInternalAddresses 1
 ExitPolicy reject *:25        # SMTP
 ExitPolicy reject *:465       # SMTPS
 ExitPolicy reject *:587       # SMTP with STARTTLS
-ExitPolicy reject *:2525      # Alternate SMTP (spam/spam bots)
+ExitPolicy reject *:2525      # Alternate SMTP
 
 ## === BLOCK HIGH-ABUSE TORRENT PORTS (Trackers + Defaults) === ##
 ExitPolicy reject *:6881-6889     # BitTorrent standard
