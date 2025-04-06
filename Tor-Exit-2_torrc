@@ -1,4 +1,4 @@
-#1.3
+#1.4
 
 ## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
@@ -24,20 +24,21 @@ CookieAuthentication 1
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 
-## === BLOCK MOST COMMON TORRENT PORTS === ##
-# These are enough to reduce most abuse without going overkill
-ExitPolicy reject *:6881-6889     # BitTorrent
-ExitPolicy reject *:51413         # Transmission
-ExitPolicy reject *:8999          # Trackerless
-ExitPolicy reject *:2710          # UDP tracker
-ExitPolicy reject *:16881         # Other client
-ExitPolicy reject *:31337         # Tixati
-ExitPolicy reject *:44168-44170   # µTorrent
-
-## === BLOCK EMAIL-RELATED PORTS === ##
-ExitPolicy reject *:25        # SMTP (sending email)
-ExitPolicy reject *:465       # SMTPS (SMTP over SSL/TLS)
+## === BLOCK EMAIL-SENDING PORTS === ##
+ExitPolicy reject *:25        # SMTP
+ExitPolicy reject *:465       # SMTPS
 ExitPolicy reject *:587       # SMTP with STARTTLS
+ExitPolicy reject *:2525      # Alternate SMTP (spam/spam bots)
+
+## === BLOCK HIGH-ABUSE TORRENT PORTS (Trackers + Defaults) === ##
+ExitPolicy reject *:6881-6889     # BitTorrent standard
+ExitPolicy reject *:51413         # Transmission default
+ExitPolicy reject *:8999          # Trackerless legacy
+ExitPolicy reject *:2710          # UDP tracker
+ExitPolicy reject *:31337         # Tixati
+ExitPolicy reject *:16881         # BitTorrent variant
+ExitPolicy reject *:44168-44170   # µTorrent
+ExitPolicy reject *:6961-6969     # Extra trackers
 
 ## === ALLOW ALL OTHER TRAFFIC === ##
 ExitPolicy accept *:*
