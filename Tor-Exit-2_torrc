@@ -1,4 +1,4 @@
-#1.2
+#1.3
 
 ## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
@@ -20,31 +20,19 @@ ExitRelay 1
 SocksPort 0
 ControlPort 9051
 CookieAuthentication 1
-# IPv6Exit 1 #This one aint got an ipv6
+# IPv6Exit 1 #No ipv6 Adress
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 
-## ===== OUTBOUND RULES ===== ##
-#These rules are here so I dont accidentaly block them down there
-ExitPolicy accept *:80-81     # HTTP
-ExitPolicy accept *:443       # HTTPS
-ExitPolicy accept *:53        # DNS
-
-## === BLOCK COMMON TORRENT PORTS === ##
-ExitPolicy reject *:6881-6889    # Standard BitTorrent ports
-ExitPolicy reject *:6969         # BitTorrent tracker port
-ExitPolicy reject *:51413        # Transmission default port
-ExitPolicy reject *:16881        # Other torrent clients
-ExitPolicy reject *:44168-44170  # µTorrent
-ExitPolicy reject *:8999         # Legacy trackerless torrenting
-ExitPolicy reject *:31337        # Tixati default port
-ExitPolicy reject *:58846        # Deluge
-ExitPolicy reject *:58946        # Alternative Deluge port
-
-# Trackers and DHT
-ExitPolicy reject *:2710         # UDP tracker port (used by torrents)
-ExitPolicy reject *:6961-6969    # Additional BitTorrent trackers
-
+## === BLOCK MOST COMMON TORRENT PORTS === ##
+# These are enough to reduce most abuse without going overkill
+ExitPolicy reject *:6881-6889     # BitTorrent
+ExitPolicy reject *:51413         # Transmission
+ExitPolicy reject *:8999          # Trackerless
+ExitPolicy reject *:2710          # UDP tracker
+ExitPolicy reject *:16881         # Other client
+ExitPolicy reject *:31337         # Tixati
+ExitPolicy reject *:44168-44170   # µTorrent
 
 ## === BLOCK EMAIL-RELATED PORTS === ##
 ExitPolicy reject *:25        # SMTP (sending email)
