@@ -1,5 +1,9 @@
 #1.7
 
+## ===== HIDDEN SERVICE SITE ===== ##
+HiddenServiceDir /var/lib/tor/privacyjam_hidden/
+HiddenServicePort 80 127.0.0.1:8080
+
 ## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
 DirPort 80
