@@ -24,6 +24,11 @@ IPv6Exit 1
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 
+## == Abuse Reports == ##
+#May 19th Port Scan
+ExitPolicy reject *:1080
+ExitPolicy reject 45.130.21.35:*
+
 ## === BLOCK EMAIL-SENDING PORTS === ##
 ExitPolicy reject *:25        # SMTP
 ExitPolicy reject *:465       # SMTPS
