@@ -1,4 +1,4 @@
-#1.9
+#2.0
 
 ## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
@@ -24,23 +24,10 @@ IPv6Exit 1
 ExitPolicyRejectPrivate 1
 ClientRejectInternalAddresses 1
 
-## == Abuse Reports == ##
-#May 19th Port Scan
-ExitPolicy reject *:1080
-ExitPolicy reject 45.130.21.35:*
-
-## === BLOCK EMAIL-SENDING PORTS === ##
-ExitPolicy reject *:25        # SMTP
-ExitPolicy reject *:465       # SMTPS
-ExitPolicy reject *:587       # SMTP w/ STARTTLS
-ExitPolicy reject *:2525      # Alternate SMTP
-
-## === BRUTE-FORCE TARGETS === ##
-ExitPolicy reject *:22        # SSH
-ExitPolicy reject *:23        # Telnet
-ExitPolicy reject *:3389      # RDP (common in botnet scanning)
-ExitPolicy reject *:5900-5910 # VNC (remote access abuse)
-ExitPolicy reject *:445       # SMB (Windows file sharing)
-
-## === ALLOW EVERYTHING ELSE === ##
-ExitPolicy accept *:*
+## === RESTRICTIVE EXIT POLICY === ##
+# Allow only HTTP, HTTPS, and DNS
+# Why?: They have changed thier plans to have restricted bandwith, but not for exsisting customers, so I don't wanna get termed as VSYS is great.
+ExitPolicy accept *:53     # DNS
+ExitPolicy accept *:80     # HTTP
+ExitPolicy accept *:443    # HTTPS
+ExitPolicy reject *:*      # Reject everything else
