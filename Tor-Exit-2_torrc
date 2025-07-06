@@ -1,4 +1,4 @@
-#1.8
+#1.9
 
 ## ===== HIDDEN SERVICE SITE ===== ##
 HiddenServiceDir /var/lib/tor/privacyjam_hidden/
@@ -16,8 +16,8 @@ ContactInfo dontsmitemedown@privacyjam.com / donate.privacyjam.com
 MyFamily 9E464461FC95585006B063CDC55884E53379D8DA, E4AE269B75718595558ADD4588A44CB96E810D02
 
 ## ===== BANDWIDTH ===== ##
-RelayBandwidthRate 7 MBytes
-RelayBandwidthBurst 9 MBytes
+RelayBandwidthRate 10 MBytes
+RelayBandwidthBurst 12 MBytes
 
 ORPort 443
 ExitRelay 1
