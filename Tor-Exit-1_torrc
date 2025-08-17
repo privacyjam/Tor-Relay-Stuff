@@ -1,19 +1,19 @@
-#2.0
+#2.1
 
 ## ===== NOTICE PAGE ===== ##
 DirPortFrontPage /etc/tor/tor-exit-notice.html
 DirPort 80
 
 ## ===== RELAY INFO ===== ##
-Nickname DontSmiteMeDown
-ContactInfo dontsmitemedown@privacyjam.com / donate.privacyjam.com
+Nickname privacyjam
+ContactInfo privacyjam-tor_relay.halves594@passmail.net / donate.privacyjam.com
 
 ## ===== FAMILY POLICY ===== ##
-MyFamily 9E464461FC95585006B063CDC55884E53379D8DA, E4AE269B75718595558ADD4588A44CB96E810D02
+MyFamily 9E464461FC95585006B063CDC55884E53379D8DA
 
 ## ===== BANDWIDTH ===== ##
 RelayBandwidthRate 25 MB
-RelayBandwidthBurst 30 MB
+RelayBandwidthBurst 27 MB
 
 ORPort 443
 ExitRelay 1
